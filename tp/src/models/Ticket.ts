@@ -55,9 +55,13 @@ export class Ticket {
   }
 }
 export class TicketPage {
-  constructor(
-    public tickets: Ticket[],
-    public hasNext: boolean,
-    public total: number | null,
-  ) {}
+  tickets: Ticket[]
+  hasNext: boolean
+  total: number | null
+
+  constructor(tickets: Ticket[], hasNext: boolean, total: number | null) {
+    this.tickets = tickets
+    this.hasNext = hasNext
+    this.total = total
+  }
 }

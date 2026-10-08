@@ -1,5 +1,58 @@
-# Vue 3 + TypeScript + Vite
+# Ticket App
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+Application Vue 3 pour gérer des tickets de projet : consulter, filtrer, créer, modifier et supprimer des tickets.
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+## Fonctionnalités
+
+- Liste des tickets avec pagination
+- Filtres par titre, statut et priorité
+- Création d'un nouveau ticket
+- Consultation et modification détaillée d'un ticket
+- Suppression d'un ticket
+- Interface simple en français
+
+## Prérequis
+
+- Node.js 18+
+- npm
+
+## Installation
+
+```bash
+npm install
+```
+
+## Lancer le projet
+
+```bash
+npm run dev
+```
+
+Puis ouvrez l'URL affichée dans le terminal, généralement :
+
+```text
+http://localhost:5173
+```
+
+## Scripts disponibles
+
+```bash
+npm run dev     # démarre le serveur de développement
+npm run build   # compile le projet pour la production
+npm run preview # prévisualise le build
+```
+
+## Notes
+
+Cette application consomme une API sur le chemin `/api` pour les opérations sur les tickets. Assurez-vous que le backend correspondant est bien démarré avant de tester l'application.
+
+## Structure du projet
+
+```text
+src/
+  components/   # composants réutilisables
+  views/        # pages de l'application
+  services/     # appel API
+  models/       # types et modèles
+  router/       # configuration des routes
+```

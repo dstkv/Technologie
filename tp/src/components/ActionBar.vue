@@ -57,7 +57,7 @@ function onStatusChange() {
             <option value="">Tous les statuts</option>
             <option value="open">Ouvert</option>
             <option value="in_progress">En cours</option>
-            <option value="closed">Fermé</option>
+            <option value="resolved">Fermé</option>
         </select>
         <!-- bouton de création de ticket (rediriger vers /create-tickets)-->
         <router-link to="/create-tickets">

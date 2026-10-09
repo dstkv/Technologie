@@ -1,9 +1,12 @@
+export type TicketStatus = 'open' | 'in_progress' | 'resolved';
+export type TicketPriority = 'low' | 'medium' | 'high';
+
 export interface Ticket {
   id: number
   title: string
   description: string
-  status: 'open' | 'in_progress' | 'resolved'
-  priority: 'low' | 'medium' | 'high'
+  status: TicketStatus
+  priority: TicketPriority
   createdAt: string
 }
 
@@ -27,6 +30,13 @@ export interface TicketCollectionResponse {
     next?: string
     previous?: string
   }
+}
+
+export interface TicketFilter {
+  status?: TicketStatus
+  priority?: TicketPriority
+  createdAfter?: string
+  createdBefore?: string
 }
 
 export function toTicket(data: Ticket): Ticket {

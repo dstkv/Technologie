@@ -4,3 +4,30 @@
     gap: 1rem;
     background-color: #f9f9f9;
 }
+
+.ticket-list section {
+    padding: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.ticket-status {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.ticket-status-open {
+    font-weight: bold;
+    color: #17a2b8;
+}
+
+.ticket-status-in_progress {
+    font-weight: bold;
+    color: #ffc107;
+}
+
+.ticket-status-resolved {
+    font-weight: bold;
+    color: #28a745;
+}

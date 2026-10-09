@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import type { Ticket } from '../models/TicketsModel';
+import type { Ticket } from '../models/TicketsModel'
+import TicketCard from '../components/TicketCard.vue'
 
 let tickets: { value: Ticket[] } = ref([]);
 
@@ -58,12 +59,7 @@ onMounted(() => {
       </section>
       <div class="ticket-list">
         <section id="ticket-{{ ticket.id }}" v-for="ticket in tickets" :key="ticket.id">
-          <h3>{{ ticket.title }}</h3>
-          <p>{{ ticket.description }}</p>
-          <p>Status: {{ ticket.status }}</p>
-          <p>Priority: {{ ticket.priority }}</p>
-          <p>Created at: {{ ticket.created_at }}</p>
-          <p>Updated at: {{ ticket.updated_at }}</p>
+          <ticket-card :ticket="ticket"></ticket-card>
         </section>
       </div>
     </div>

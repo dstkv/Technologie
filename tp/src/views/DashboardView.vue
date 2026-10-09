@@ -3,6 +3,7 @@ import { onMounted, ref } from 'vue'
 import type { Ticket, TicketCollection } from '../models/TicketsModel'
 import TicketCard from '../components/TicketCard.vue'
 import { getTickets } from '../services/TicketsService'
+import AppActionBar from '../components/ActionBar.vue'
 
 let tickets: { value: Ticket[] } = ref([]);
 
@@ -28,11 +29,8 @@ onMounted(() => {
     <p>Visualisation des tickets</p>
     <div v-if="tickets.length === 0">Aucun ticket à afficher ! :(</div>
     <div v-else>
-      <section>
-        <p>Rechercher ou filtrer les tickets</p>
-        <div>
-          <!-- Formulaire de recherche et de filtrage des tickets, faire un composant dédié -->
-        </div>
+      <section class="action-bar">
+        <app-action-bar></app-action-bar>
       </section>
       <div class="ticket-list">
         <section id="ticket-{{ ticket.id }}" v-for="ticket in tickets" :key="ticket.id">

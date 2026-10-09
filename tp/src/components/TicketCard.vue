@@ -11,7 +11,6 @@ defineProps<{
         <p>{{ ticket.description }}</p>
         <p :class="`ticket-status ticket-status-${ticket.status}`">Statut : {{ ticket.status }}</p>
         <p :class="`ticket-priority ticket-priority-${ticket.priority}`">Priorité : {{ ticket.priority }}</p>
-        <p>Créé le : {{ ticket.created_at }}</p>
-        <p>Mis à jour le : {{ ticket.updated_at }}</p>
+        <p>Créé le : {{ ticket.createdAt }}</p>
     </div>
 </template>

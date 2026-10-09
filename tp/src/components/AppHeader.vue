@@ -4,7 +4,7 @@ import { RouterLink } from 'vue-router'
 <template>
   <header class="headerBlack">
     <RouterLink to="/">
-      <img src="../../public/Logo.png" alt="Technologie" class="Logo" />
+      <img src="/Logo.png" alt="Technologie" class="Logo" />
     </RouterLink>
     <h1 class="Titre">Technologie</h1>
   </header>

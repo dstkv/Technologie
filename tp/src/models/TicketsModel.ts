@@ -21,6 +21,17 @@ export interface TicketCollection {
   }
 }
 
+export interface TicketRequest {
+  page: number
+  title: string | string[] | undefined
+  status: TicketStatus | TicketStatus[] | undefined
+  priority: TicketPriority | TicketPriority[] | undefined
+  createdAfter?: string
+  createdBefore?: string
+  createdStrictlyAfter?: string
+  createdStrictlyBefore?: string
+}
+
 export interface TicketCollectionResponse {
   member: Ticket[]
   totalItems: number
@@ -32,7 +43,7 @@ export interface TicketCollectionResponse {
   }
 }
 
-export interface TicketFilter {
+export interface TicketSearchFilter {
   status?: TicketStatus
   priority?: TicketPriority
   createdAfter?: string

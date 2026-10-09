@@ -5,9 +5,13 @@ const searchQuery = ref('');
 const selectedStatus = ref('');
 const existingSearchDebounce = ref<ReturnType<typeof setTimeout> | null>(null);
 
+const emitFilters = defineEmits<{
+    (e: 'update:searchQuery', value: string): void;
+    (e: 'update:selectedStatus', value: string): void;
+}>();
+
 function performSearch() {
-    // Logique de recherche à implémenter ici
-    console.log('Recherche effectuée pour :', searchQuery.value);
+    emitFilters('update:searchQuery', searchQuery.value);
 }
 
 function onSearchInput() {
@@ -31,27 +35,21 @@ function clearSearch() {
 }
 
 function onStatusChange() {
-    // Logique de filtrage par statut à implémenter ici
-    console.log('Filtrage par statut :', selectedStatus.value);
+    emitFilters('update:selectedStatus', selectedStatus.value);
 }
 
 </script>
 <template>
     <div class="action-bar">
         <div class="search-field">
-            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="11" cy="11" r="7" />
                 <path d="m20 20-4-4" />
             </svg>
             <input type="text" placeholder="Rechercher un ticket..." v-model="searchQuery" @input="onSearchInput" />
-            <button
-                v-if="searchQuery"
-                class="clear-search-button"
-                type="button"
-                aria-label="Effacer la recherche"
-                @click="clearSearch"
-            >
+            <button v-if="searchQuery" class="clear-search-button" type="button" aria-label="Effacer la recherche"
+                @click="clearSearch">
                 ×
             </button>
         </div>

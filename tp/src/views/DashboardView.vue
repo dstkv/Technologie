@@ -56,7 +56,7 @@ onMounted(() => {
           <!-- Formulaire de recherche et de filtrage des tickets, faire un composant dédié -->
         </div>
       </section>
-      <div>
+      <div class="ticket-list">
         <section id="ticket-{{ ticket.id }}" v-for="ticket in tickets" :key="ticket.id">
           <h3>{{ ticket.title }}</h3>
           <p>{{ ticket.description }}</p>

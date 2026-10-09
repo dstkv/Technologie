@@ -9,9 +9,9 @@ defineProps<{
     <div class="ticket-card">
         <h3>{{ ticket.title }}</h3>
         <p>{{ ticket.description }}</p>
-        <p :class="`ticket-status ticket-status-${ticket.status}`">Status: {{ ticket.status }}</p>
-        <p :class="`ticket-priority ticket-priority-${ticket.priority}`">Priority: {{ ticket.priority }}</p>
-        <p>Created at: {{ ticket.created_at }}</p>
-        <p>Updated at: {{ ticket.updated_at }}</p>
+        <p :class="`ticket-status ticket-status-${ticket.status}`">Statut : {{ ticket.status }}</p>
+        <p :class="`ticket-priority ticket-priority-${ticket.priority}`">Priorité : {{ ticket.priority }}</p>
+        <p>Créé le : {{ ticket.created_at }}</p>
+        <p>Mis à jour le : {{ ticket.updated_at }}</p>
     </div>
 </template>

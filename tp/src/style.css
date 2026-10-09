@@ -32,6 +32,21 @@
     color: #28a745;
 }
 
+.ticket-priority-low {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.ticket-priority-medium {
+    font-weight: bold;
+    color: #ffc107;
+}
+
+.ticket-priority-high {
+    font-weight: bold;
+    color: #dc3545;
+}
+
 .headerBlack {
     display: flex;
     align-items: center;

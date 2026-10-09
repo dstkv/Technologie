@@ -3,7 +3,6 @@ import { onMounted, ref } from 'vue'
 import type { Ticket, TicketCollection } from '../models/TicketsModel'
 import TicketCard from '../components/TicketCard.vue'
 import { getTickets } from '../services/TicketsService'
-import AppHeader from '../components/AppHeader.vue'
 
 let tickets: { value: Ticket[] } = ref([]);
 

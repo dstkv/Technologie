@@ -1,62 +1,65 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import type { Ticket, TicketCollection, TicketRequest, TicketStatus } from '../models/TicketsModel'
+import { RouterLink } from 'vue-router'
+import FilterBar from '../components/FilterBar.vue'
 import TicketCard from '../components/TicketCard.vue'
-import { getTickets } from '../services/TicketsService'
-import AppActionBar from '../components/ActionBar.vue'
+import { TicketPage } from '../models/Ticket'
+import type { TicketFilters } from '../models/Ticket'
+import { errorMessage, getTickets } from '../services/ticketService'
 
-const tickets = ref<Ticket[]>([])
-const currentTicketFilter = ref<TicketRequest>({
-  page: 1,
-  title: '',
-  status: undefined,
-  priority: undefined,
-  createdAfter: undefined,
-  createdBefore: undefined,
-})
+const result = ref(new TicketPage([], false, null))
+const page = ref(1)
+const loading = ref(false)
+const error = ref('')
+const filters = ref<TicketFilters>({ title: '', status: '', priority: '' })
 
-function fetchTickets() {
-  getTickets(currentTicketFilter.value)
-    .then((fetchedTickets: TicketCollection) => {
-      tickets.value = fetchedTickets.tickets
-    })
-    .catch((error) => {
-      console.error('Erreur lors de la récupération des tickets :', error)
-    })
+async function loadTickets(targetPage = page.value) {
+  loading.value = true
+  error.value = ''
+  try {
+    const nextResult = await getTickets(targetPage, filters.value)
+    result.value = nextResult
+    page.value = targetPage
+  } catch (err) {
+    error.value = errorMessage(err)
+  } finally {
+    loading.value = false
+  }
 }
-
-function handleSearchQueryUpdate(searchQuery: string) {
-  currentTicketFilter.value.title = searchQuery.trim()
-  currentTicketFilter.value.page = 1
-  fetchTickets()
+function search(newFilters: TicketFilters) {
+  filters.value = newFilters
+  loadTickets(1)
 }
-
-function handleSelectedStatusUpdate(selectedStatus: string) {
-  currentTicketFilter.value.status = selectedStatus === '' ? undefined : (selectedStatus as TicketStatus)
-  currentTicketFilter.value.page = 1
-  fetchTickets()
-}
-
-onMounted(() => {
-  fetchTickets()
-})
+onMounted(() => loadTickets())
 </script>
 
 <template>
-  <div>
-    <p>Dashboard</p>
-    <p>Visualisation des tickets</p>
-    <section class="action-bar">
-      <app-action-bar @update:searchQuery="handleSearchQueryUpdate"
-        @update:selectedStatus="handleSelectedStatusUpdate"></app-action-bar>
-    </section>
-    <div v-if="tickets.length === 0">Aucun ticket à afficher ! :(</div>
-    <div v-else>
-      <div class="ticket-list">
-        <section id="ticket-{{ ticket.id }}" v-for="ticket in tickets" :key="ticket.id">
-          <ticket-card :ticket="ticket"></ticket-card>
-        </section>
-      </div>
+  <div class="page-heading">
+    <div>
+      <h1>Tickets</h1>
+      <p class="muted">Suivi des anomalies du projet</p>
     </div>
+    <RouterLink to="/tickets/new" class="button">Nouveau ticket</RouterLink>
+  </div>
+  <FilterBar :disabled="loading" @search="search" />
+  <p v-if="error" class="error" role="alert">{{ error }}</p>
+  <p v-if="loading">Chargement des tickets...</p>
+  <template v-else>
+    <p v-if="result.total !== null" class="muted">
+      {{ result.total }} ticket(s) correspondant aux filtres
+    </p>
+    <p v-if="result.tickets.length === 0" class="panel">Aucun ticket sur cette page.</p>
+    <div v-else class="ticket-list">
+      <TicketCard v-for="ticket in result.tickets" :key="ticket.id" :ticket="ticket" />
+    </div>
+  </template>
+  <div class="pagination">
+    <button class="secondary" :disabled="page === 1 || loading" @click="loadTickets(page - 1)">
+      Précédent
+    </button>
+    <span>Page {{ page }}</span>
+    <button class="secondary" :disabled="!result.hasNext || loading" @click="loadTickets(page + 1)">
+      Suivant
+    </button>
   </div>
 </template>

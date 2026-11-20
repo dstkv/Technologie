@@ -1,26 +1,16 @@
 <script setup lang="ts">
-import type { Ticket } from '../models/TicketsModel';
-import { ref } from 'vue';
-
-defineProps<{
-    ticket: Ticket;
-}>();
-
-const showDetails = ref(false);
-
+import { RouterLink } from 'vue-router'
+import { priorityLabels, statusLabels } from '../models/Ticket'
+import type { Ticket } from '../models/Ticket'
+defineProps<{ ticket: Ticket }>()
 </script>
-
 <template>
-    <div class="ticket-card">
-        <dev>
-            <h3>{{ ticket.title }}</h3>
-            <p v-if="showDetails">{{ ticket.description }}</p>
-            <p :class="`ticket-status ticket-status-${ticket.status}`">Statut : {{ ticket.status }}</p>
-            <p :class="`ticket-priority ticket-priority-${ticket.priority}`">Priorité : {{ ticket.priority }}</p>
-            <p v-if="showDetails">Créé le : {{ ticket.createdAt }}</p>
-        </dev>
-        <button @click="showDetails = !showDetails">
-            {{ showDetails ? 'Masquer les détails' : 'Afficher les détails' }}
-        </button>
+  <article class="panel ticket-card">
+    <div class="ticket-heading">
+      <h2><RouterLink :to="{ name: 'ticket-detail', params: { id: ticket.id } }">{{ ticket.title }}</RouterLink></h2>
+      <span class="badge" :class="`priority-${ticket.priority}`">{{ priorityLabels[ticket.priority] }}</span>
     </div>
+    <p class="preview">{{ ticket.description }}</p>
+    <div class="ticket-footer"><span>{{ statusLabels[ticket.status] }}</span><span>#{{ ticket.id }}</span></div>
+  </article>
 </template>

@@ -2,10 +2,8 @@
 import { RouterLink } from 'vue-router'
 </script>
 <template>
-  <header class="headerBlack">
-    <RouterLink to="/">
-      <img src="/Logo.png" alt="Technologie" class="Logo" />
-    </RouterLink>
-    <h1 class="Titre">Technologie</h1>
-  </header>
+  <header class="app-header"><div class="container header-content">
+    <RouterLink to="/" class="brand">Mini Bug-Tracker</RouterLink>
+    <nav><RouterLink to="/">Tickets</RouterLink><RouterLink to="/tickets/new">Créer un ticket</RouterLink></nav>
+  </div></header>
 </template>

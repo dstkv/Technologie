@@ -1,38 +1,16 @@
 # Ticket App
 
-Application Vue 3 pour gérer des tickets de projet : consulter, filtrer, créer, modifier et supprimer des tickets.
+Application Vue 3 pour consulter, filtrer, créer, modifier et supprimer des tickets, avec pagination et interface en français.
 
-## Fonctionnalités
+## Avec Docker
 
-- Liste des tickets avec pagination
-- Filtres par titre, statut et priorité
-- Création d'un nouveau ticket
-- Consultation et modification détaillée d'un ticket
-- Suppression d'un ticket
-- Interface simple en français
-
-## Prérequis
-
-- Node.js 18+
-- npm
-
-## Installation
-
-```bash
-npm install
-```
-
-## Lancer le projet
-
-### Avec Docker
-
-Avec Docker et Docker Compose installés, lancez :
+Avec Docker et Docker Compose installés :
 
 ```bash
 docker compose up --build -d
 ```
 
-Ouvrez ensuite [http://localhost:8080](http://localhost:8080). Compose récupère l'image `nicolascauchois/fisa3-techno-web-api-tp:1.0.0` et démarre l'API avec le front. Les requêtes `/api` sont transmises à l'API par le serveur du front.
+Ouvrir [http://localhost:8080](http://localhost:8080). Le front et l'API démarrent ensemble ; les requêtes `/api` sont transmises à l'API par Nginx.
 
 Pour arrêter les conteneurs :
 
@@ -40,37 +18,15 @@ Pour arrêter les conteneurs :
 docker compose down
 ```
 
-### En développement local
+## En développement local
+
+Prérequis : Node.js 22.12 ou plus récent, npm et l'API démarrée sur `http://127.0.0.1:1024`.
 
 ```bash
+npm ci
 npm run dev
 ```
 
-Puis ouvrez l'URL affichée dans le terminal, généralement :
+Ouvrir l'URL affichée dans le terminal, généralement [http://localhost:5173](http://localhost:5173). Vite transmet les requêtes `/api` au serveur local.
 
-```text
-http://localhost:5173
-```
-
-## Scripts disponibles
-
-```bash
-npm run dev     # démarre le serveur de développement
-npm run build   # compile le projet pour la production
-npm run preview # prévisualise le build
-```
-
-## Notes
-
-Cette application consomme une API sur le chemin `/api` pour les opérations sur les tickets. Assurez-vous que le backend correspondant est bien démarré avant de tester l'application.
-
-## Structure du projet
-
-```text
-src/
-  components/   # composants réutilisables
-  views/        # pages de l'application
-  services/     # appel API
-  models/       # types et modèles
-  router/       # configuration des routes
-```
+`npm run build` compile le projet. `npm run preview` permet de prévisualiser le build du front ; utiliser Docker ou le mode développement pour tester avec l'API.

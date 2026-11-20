@@ -24,6 +24,24 @@ npm install
 
 ## Lancer le projet
 
+### Avec Docker
+
+Avec Docker et Docker Compose installés, lancez :
+
+```bash
+docker compose up --build -d
+```
+
+Ouvrez ensuite [http://localhost:8080](http://localhost:8080). Compose récupère l'image `nicolascauchois/fisa3-techno-web-api-tp:1.0.0` et démarre l'API avec le front. Les requêtes `/api` sont transmises à l'API par le serveur du front.
+
+Pour arrêter les conteneurs :
+
+```bash
+docker compose down
+```
+
+### En développement local
+
 ```bash
 npm run dev
 ```

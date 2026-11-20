@@ -1,0 +1,10 @@
+services:
+  api:
+    image: nicolascauchois/fisa3-techno-web-api-tp:1.0.0
+
+  front:
+    build: .
+    ports:
+      - "8080:80"
+    depends_on:
+      - api

@@ -11,15 +11,28 @@ function reset() {
 </script>
 <template>
   <form class="panel filters" @submit.prevent="search">
-    <label>Titre<input v-model="filters.title" type="search" placeholder="Rechercher un ticket..." /></label>
-    <label>Statut<select v-model="filters.status">
-      <option value="">Tous</option><option value="open">Ouvert</option>
-      <option value="in_progress">En cours</option><option value="resolved">Résolu</option>
-    </select></label>
-    <label>Priorité<select v-model="filters.priority">
-      <option value="">Toutes</option><option value="low">Faible</option>
-      <option value="medium">Moyenne</option><option value="high">Haute</option>
-    </select></label>
+    <label>
+      Titre
+      <input v-model="filters.title" type="search" placeholder="Rechercher un ticket..." />
+    </label>
+    <label>
+      Statut
+      <select v-model="filters.status">
+        <option value="">Tous</option>
+        <option value="open">Ouvert</option>
+        <option value="in_progress">En cours</option>
+        <option value="resolved">Résolu</option>
+      </select>
+    </label>
+    <label>
+      Priorité
+      <select v-model="filters.priority">
+        <option value="">Toutes</option>
+        <option value="low">Faible</option>
+        <option value="medium">Moyenne</option>
+        <option value="high">Haute</option>
+      </select>
+    </label>
     <button type="submit" :disabled="disabled">Rechercher</button>
     <button type="button" class="secondary" :disabled="disabled" @click="reset">Réinitialiser</button>
   </form>
